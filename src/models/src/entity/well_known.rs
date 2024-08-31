@@ -35,6 +35,7 @@ pub struct WellKnown {
     pub ui_locales_supported: Vec<String>,
     pub claims_parameter_supported: bool,
     pub client_id_metadata_document_supported: bool,
+    pub authorization_response_iss_parameter_supported: bool,
 }
 
 const IDX: &str = ".well-known";
@@ -192,6 +193,7 @@ impl WellKnown {
             ui_locales_supported,
             claims_parameter_supported: true,
             client_id_metadata_document_supported: true,
+            authorization_response_iss_parameter_supported: true,
         }
     }
 }

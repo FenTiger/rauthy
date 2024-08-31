@@ -131,7 +131,7 @@ pub async fn post_authorize(
     code.save(data).await?;
 
     // build location header
-    let mut loc = format!("{}?code={}", req_data.redirect_uri, code.id);
+    let mut loc = format!("{}?code={}&iss={}", req_data.redirect_uri, code.id, data.issuer);
     if let Some(state) = req_data.state {
         write!(loc, "&state={}", state)?;
     };
@@ -216,7 +216,7 @@ pub async fn post_authorize_refresh(
 
     // build location header
     let header_loc = if let Some(s) = req_data.state {
-        format!("{}?code={}&state={}", req_data.redirect_uri, code.id, s)
+        format!("{}?code={}&state={}&iss={}", req_data.redirect_uri, code.id, s, data.issuer)
     } else {
         format!("{}?code={}", req_data.redirect_uri, code.id)
     };
